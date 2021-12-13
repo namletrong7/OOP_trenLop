@@ -59,12 +59,12 @@ public class nhanVien_tiepThi extends  nhanVien_hanhChinh{
     }
     @Override
     public long thuNhap(){
-        return (long) (getLuong()+(getDoanhSo()*getHoaHong())/100) ;
+        return (long) ((float) getLuong()+(getDoanhSo()*getHoaHong()/100)) ;
     }
 
     @Override
     public String toString() {
-        return  super.toString()+"doanh số :" + doanhSo + ", hoa hồng: " + hoaHong +", thuế thu nhập: "+super.thue();
+        return  super.toString()+",thu nhâp: "+thuNhap()+", doanh số :" + doanhSo + ", hoa hồng: " + hoaHong ;
     }
     
     

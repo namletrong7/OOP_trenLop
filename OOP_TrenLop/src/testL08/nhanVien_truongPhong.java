@@ -61,7 +61,7 @@ public class nhanVien_truongPhong extends nhanVien_hanhChinh{
 
     @Override
     public String toString() {
-        return super.toString()+ "luong trách nhiệm: " + luongTrachNhiem +", thue thu nhap: "+ super.thue();
+        return super.toString()+", thu nhâp: "+thuNhap()+ ",luong trách nhiệm: " + luongTrachNhiem ;
         
     }
     

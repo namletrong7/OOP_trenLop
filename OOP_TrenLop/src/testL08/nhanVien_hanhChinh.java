@@ -15,7 +15,7 @@ public class nhanVien_hanhChinh {
    private String maNV,hoten ;
   private long luong ; 
 
-    public nhanVien_hanhChinh(String maNV, String hoten, double luong) {
+    public nhanVien_hanhChinh(String maNV, String hoten, long luong) {
         this.maNV = maNV;
         this.hoten = hoten;
         this.luong = luong;
@@ -60,21 +60,28 @@ public class nhanVien_hanhChinh {
         
     }
     public long thuNhap(){
-        return  getLuong();
+        return  this.getLuong();
     }
     public double thue(){
-    long x=thuNhap();
+    long x=this.thuNhap();
        double thueTN=0 ;
        
         if(x<9000000){
-            thueTN=12 ;
+            thueTN=0 ;
         }
-       else if(x>=9000000 || x <=15000000){
-            thueTN=(double)(x-9000000)*(10/100) ;
+       if(x>=9000000 && x <=15000000){
+           if(x==9000000){
+              thueTN=(double)(9000000)*(0.1) ;  
+           }
+           else if(x==15000000)
+            thueTN=(double)15000000*(0.1) ;
+           else{
+                 thueTN=(double)(x-9000000)*(0.1) ; 
+           }
             
         }
-      else  if(x>15000000){
-            thueTN=(double)(6000000)*(10/100)+(x-15000000)*(12/100);
+        if(x>15000000){
+            thueTN=(double)(6000000)*(0.1)+(x-15000000)*(0.12);
         }
         return thueTN ;
         
@@ -82,7 +89,7 @@ public class nhanVien_hanhChinh {
     
     @Override
     public String toString() {
-        return "maNV: " + maNV + ", ho ten: " + hoten + ", luong: " +getLuong() +" ,thuế thu nhập: "+thue() ;
+        return "maNV: " + maNV + ", ho ten: " + hoten + ", luong: " +luong +" ,thuế thu nhập: "+thue() ;
     }
    
 }
