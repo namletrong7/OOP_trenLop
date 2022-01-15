@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.nashorn.internal.objects.NativeDate;
+import static jdk.nashorn.internal.objects.NativeDate.getTime;
 
 
 /**
@@ -20,7 +22,7 @@ import java.util.logging.Logger;
  * @author HP
  */
 public class TheMuon {
-    SimpleDateFormat DF=new SimpleDateFormat("dd/MM/YYYY");
+    SimpleDateFormat DF=new SimpleDateFormat("dd/MM/yyyy");
    private  String soPhieuMuon ;
    private String  ngayMuon,ngayTra ;
    private String soHieuSach ;
@@ -39,13 +41,8 @@ public class TheMuon {
         this.sv = sv;
     }
 
-    public SimpleDateFormat getDF() {
-        return DF;
-    }
+ 
 
-    public void setDF(SimpleDateFormat DF) {
-        this.DF = DF;
-    }
 
     public String getSoPhieuMuon() {
         return soPhieuMuon;
@@ -78,25 +75,70 @@ public class TheMuon {
     public void setSoHieuSach(String soHieuSach) {
         this.soHieuSach = soHieuSach;
     }
+    public boolean checkTG(Date date1, Date date2){
+        if(date1.compareTo(date2) >0){
+            return false ;
+        }
+        else{
+            return true ;
+        }
+    }
 
-     public void nhap(){
-         System.out.println("nhập số phiếu mượn: ");
-         this.soPhieuMuon=nhap.nextLine();
-         System.out.println("nhập ngày mượn:");
-         this.ngayMuon=nhap.nextLine();
-         System.out.println("nhập ngayTra: ");
-         this.ngayTra=nhap.nextLine();
-         System.out.println("nhập số hiệu sách: ");
-         this.soHieuSach=nhap.nextLine();
-         sv.nhap();
-         
+     public void nhap() {
+       
+               System.out.println("nhập số phiếu mượn: ");
+               this.soPhieuMuon=nhap.nextLine();
+            
+             while (true) {             
+               while (true) {
+                   try {
+                    System.out.println("nhập ngày mượn:");
+                     this.ngayMuon=nhap.nextLine();  
+                      date1=DF.parse(this.ngayMuon);
+                      DF.format(date1) ;
+                      
+                      break ;
+                   } catch (Exception e) {
+                       System.out.println("bạn đã nhập sai định dạng ngày\n,Xin vui lòng nhập lại(ví dụ : 01/01/2000)");
+                       continue;
+                   }
+             
+         }
+                while (true) {
+                   try {
+                    System.out.println("nhập ngày Trả: ");
+                        this.ngayTra=nhap.nextLine();
+                     date2=DF.parse(this.ngayTra);
+                       
+                      break ;
+                   } catch (Exception e) {
+                       System.out.println("bạn đã nhập sai định dạng ngày\n,Xin vui lòng nhập lại(ví dụ : 01/01/2000)");
+                       continue;
+                   }
+             
+         }
+
+          if(checkTG(date1, date2)==true){
+              break ;
+          }
+          else{
+              System.out.println("Ngay tra phai lon hon hoac bang ngay muon,Hay nhap lai.");
+              continue;
+          }
+    
+         }
+            
+  
+          System.out.println("nhập số hiệu sách: ");
+          this.soHieuSach=nhap.nextLine();      
+         sv.nhap1();
          
      }
 
     @Override
     public String toString() {
-        return "TheMuon{" +sv.toString()+
-                "DF=" + DF + ", soPhieuMuon=" + soPhieuMuon + ", ngayMuon=" + ngayMuon + ", ngayTra=" + ngayTra + ", soHieuSach=" + soHieuSach + '}';
+        return "TheMuon{" +sv.toString()
+                + ", soPhieuMuon=" + soPhieuMuon + ", ngayMuon=" +  DF.format(date1)  + ", ngayTra= " + DF.format(date2)+ ", soHieuSach=" + soHieuSach + '}';
     }
      
      

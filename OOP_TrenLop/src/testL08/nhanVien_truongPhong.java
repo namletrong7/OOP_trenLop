@@ -26,12 +26,7 @@ public class nhanVien_truongPhong extends nhanVien_hanhChinh{
     public nhanVien_truongPhong() {
     }
 
-   
-
-    
-    
-    
-    public long getLuongTrachNhiem() {
+  public long getLuongTrachNhiem() {
         return luongTrachNhiem;
     }
 

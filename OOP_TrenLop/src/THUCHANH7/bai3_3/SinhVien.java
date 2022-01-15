@@ -56,18 +56,52 @@ public class SinhVien {
     public void setNamSinh(int namSinh) {
         this.namSinh = namSinh;
     }
-    public void nhap(){
+    public boolean checkLop(String text){
+        char kyTu1=text.charAt(0);
+         char kyTu2=text.charAt(1);
+        if(kyTu1=='C'  && kyTu2=='T'){
+            return true ;
+        }
+        else{
+                return false ;
+                }
+    }
+    public void nhap1(){
         System.out.println("-nhập  thông tin sinh viên--");
         System.out.println("nhập họ tên: ");
         this.hoTen=nhap.nextLine();
         System.out.println("nhập năm sinh: ");
-        this.namSinh=nhap.nextInt();
-        nhap.nextLine();
-        System.out.println("nhập tuôi: ");
-        this.tuoi=nhap.nextInt();
-       nhap.nextLine();
-        System.out.println("nhập lớp :");
+        while (true) {            
+            try {
+                 this.namSinh=Integer.parseInt(nhap.nextLine()) ;
+                 break ;
+            } catch (Exception e) {
+                System.out.println("bạn đã nhâp sai định dạng năm sinh, xin vui lòng nhập lại");
+                continue;
+            }
+        }
+      System.out.println("nhập tuôi: ");
+         while (true) {            
+            try {
+                 this.tuoi=Integer.parseInt(nhap.nextLine()) ;
+                 break ;
+            } catch (Exception e) {
+                System.out.println("bạn đã nhâp sai định dạng tuổi, xin vui lòng nhập lại");
+                continue;
+            }
+        }
+        while (true) {            
+                 System.out.println("nhập lớp :");
         this.lop=nhap.nextLine();
+        if(checkLop(this.lop)==true){
+            break ;
+        }
+        else{
+            System.out.println("lớp chưa đúng định dạng(định dạng đúng là ví dụ :CT4D),\nBan hay nhap lai");
+            continue;
+        }
+        }
+  
         
     }
 

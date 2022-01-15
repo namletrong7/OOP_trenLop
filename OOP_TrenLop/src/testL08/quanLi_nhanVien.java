@@ -23,7 +23,7 @@ public class quanLi_nhanVien {
     List<nhanVien_truongPhong> list_NVTP =new ArrayList<>();
     
     public void menu(){
-        System.out.println("------------menu-------------------------");
+        System.out.println("------------MENU -------------------------");
         System.out.println("1.Them thong tin nhan vien");
         System.out.println("2.Xuat danh sach nhan vien");
         System.out.println("3.Tim kiem nhan vien theo ma nhan vien");
@@ -78,7 +78,8 @@ public class quanLi_nhanVien {
                     chon2=nhap.nextInt();
                      switch(chon2){
                         case 1:{
-                            System.out.println("ban muon nhap bao nhieu nhan vien: ");
+                            while(true){
+                                System.out.println("ban muon nhap bao nhieu nhan vien: ");
                              int n=nhap.nextInt() ;
                              nhap.nextLine();
                        for(int i=1 ;i<=n;i++){
@@ -86,22 +87,35 @@ public class quanLi_nhanVien {
                            System.out.println("nhap nhan vien thu: "+i);
                            nhanVien_hanhChinh nvhc =new nhanVien_hanhChinh();
                            nvhc.nhapTT();
-                           if(checkMaNV_hanhChinh(nvhc.getMaNV())){
+                           if(checkMaNV_hanhChinh(nvhc.getMaNV())==true){
                                 list_NVHC.add(nvhc);
+                                System.out.println("nhân viên: "+nvhc.getHoten()+" đã thêm vào danh sách thành công");
                            }
                            else{
-                               System.out.println("mã nhân viên: " +nvhc.getMaNV()+" đã tồn tại xin vui lòng check lại thông tin lại thông tin");
+                               System.out.println("mã nhân viên: " +nvhc.getMaNV()+" đã tồn tại xin vui lòng nhập lại thông tin");
                                continue;
                            }
                           
                          
-                       }
+                       } 
+                        System.out.println("----Bạn có nhập nữa không(yes/no): ");
+                           String luachonString=nhap.nextLine();
+                           if(luachonString.equalsIgnoreCase("yes")){
+                               continue;
+                           }
+                           else{
+                                   break ;
+                                   }
+                          
+                            }
+                          
                          
                             break ;
                         }
                        
                         case 2:{
-                            System.out.println("ban muon nhap bao nhieu nhan vien: ");
+                            while(true){
+                                System.out.println("ban muon nhap bao nhieu nhan vien: ");
                              int m=nhap.nextInt() ;
                              nhap.nextLine();
                        for(int i=1 ;i<=m;i++){
@@ -110,18 +124,31 @@ public class quanLi_nhanVien {
                            nvtt.nhapTT();
                            if(checkMaNV_tiepThi(nvtt.getMaNV())){
                                list_NVTT.add(nvtt);
+                               System.out.println("\t\t\t\t\tThêm thành công");
                            }
                             else{
-                               System.out.println("mã nhân viên: " +nvtt.getMaNV()+" đã tồn tại xin vui lòng check lại thông tin lại thông tin");
+                               System.out.println("-----mã nhân viên: " +nvtt.getMaNV()+" đã tồn tại xin vui lòng nhập lại------");
                                continue;
                            }
                           
                        }
+                       System.out.println("----Bạn có nhập nữa không(yes/no): ");
+                           String luachonString=nhap.nextLine();
+                           if(luachonString.equalsIgnoreCase("yes")){
+                               continue;
+                           }
+                           else{
+                                   break ;
+                                   }
+                          
+                       
+                            }
+                            
                             break ; 
                         }
                         case 3:
-                        {
-                           System.out.println("ban muon nhap bao nhieu nhan vien: ");
+                        {  while(true){
+                            System.out.println("ban muon nhap bao nhieu nhan vien: ");
                              int l=nhap.nextInt() ;
                              nhap.nextLine();
                        for(int i=1 ;i<=l;i++){
@@ -132,26 +159,36 @@ public class quanLi_nhanVien {
                                 list_NVTP.add(nvtp);
                            }
                            else{
-                               System.out.println("mã nhân viên: " +nvtt.getMaNV()+" đã tồn tại xin vui lòng check lại thông tin lại thông tin");
+                               System.out.println("mã nhân viên: " +nvtp.getMaNV()+" đã tồn tại xin vui lòng check lại thông tin lại thông tin");
                                continue;
                            }
                           
                           
                        }
+                        System.out.println("----Bạn có nhập nữa không(yes/no): ");
+                           String luachonString=nhap.nextLine();
+                           if(luachonString.equalsIgnoreCase("yes")){
+                               continue;
+                           }
+                           else{
+                                   break ;
+                                   }
+                        }
+                           
                         break ;
                             
                         }
                          default:
                              System.exit(0);
                         }
-                        System.out.println("ban co muon nhap thong tin tiep khong(yes/no): ");
+                        System.out.println("ban co muon về MENU chính không(yes/no): ");
                         String chonTiep ;
                         chonTiep=nhap.nextLine();
                         if(chonTiep.equals("yes")){
-                            continue;
+                            break ;
                         }
                         else{
-                            break ;
+                            continue ;
                         }
                      
                    
@@ -238,7 +275,7 @@ public class quanLi_nhanVien {
                         nhap.nextLine();
                         switch(chon3){
                             case 1:{
-                                String maNV ;
+                                while(true){ String maNV ;
                                 boolean flag=false ;
                                 nhanVien_hanhChinh nv_hc =null ;
                                 System.out.print("\nNhap ma nhan vien ban muon tim: ");
@@ -257,6 +294,16 @@ public class quanLi_nhanVien {
                                 else{
                                     System.out.println("khong tim thay nhan vien");
                                 }
+                                    System.out.println("Ban có tiếp tục tìm kiếm nữa không(yes/no): ");
+                                    String a=nhap.nextLine();
+                                    if(a.equalsIgnoreCase("yes")){
+                                        continue;
+                                    }
+                                    else{
+                                           break ; 
+                                            }
+                                }
+                               
                                 break ;
                                 
                             }
@@ -308,13 +355,13 @@ public class quanLi_nhanVien {
                        
                         
                     }
-                         System.out.print("\nban co muon tiep tuc tim kiem nhan vien nua khong(yes/no): ");
+                         System.out.print("\n Bạn có muốn trở về MENU chính không:(yes/no): ");
                         String luaChon3=nhap.nextLine();
                         if(luaChon3.equals("yes")){
-                            continue;
+                           break ;
                         }
                         else{
-                            break ;
+                           continue;
                         }
                        
                     }
