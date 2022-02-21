@@ -15,7 +15,8 @@ import java.util.Scanner;
  * @author HP
  */
 public class SanPham {
-    private String maSp , tenSP  ;
+    String maSp;
+    private String tenSP;
     private double donGia ;
     private String ngaySX ;
     int soLuongSP ;

@@ -20,6 +20,7 @@ public class QuanLI {
     ArrayList<SanPham> listSP = new ArrayList<>();
     ArrayList<KhachHang> listKH = new ArrayList<>();
     ArrayList<HoaDon> listHD = new ArrayList<>();
+    ArrayList<SP_hoaDon> listSPHD = new ArrayList<>();
 
     public boolean checkMaSP(String text, ArrayList<SanPham> listSP) {
         for (SanPham x : listSP) {
@@ -65,18 +66,18 @@ public class QuanLI {
                     System.out.println("_______NHẬP THÔNG TIN SẢN PHẨM________");
                     while (true) {
                         int n;
-                       
-                   while(true){
-                       try {
-                            System.out.print("\nBạn muốn nhập bao nhiêu sản phẩm: ");
-                                 n = Integer.parseInt(nhap.nextLine());
-                                 break ;
-                       } catch (Exception e) {
-                             System.out.println("\t\tCHÚ Ý:đã nhập sai đinh dạng xin vui lòng nhâp lại ");
+
+                        while (true) {
+                            try {
+                                System.out.print("\nBạn muốn nhập bao nhiêu sản phẩm: ");
+                                n = Integer.parseInt(nhap.nextLine());
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("\t\tCHÚ Ý:đã nhập sai đinh dạng xin vui lòng nhâp lại ");
                                 continue;
-                       }
-                   }     
-                       for (int i = 1; i <= n; i++) {
+                            }
+                        }
+                        for (int i = 1; i <= n; i++) {
                             SanPham sp = new SanPham();
                             sp.nhapSP();
                             System.out.print("\nnhập số lượng sp: ");
@@ -114,22 +115,21 @@ public class QuanLI {
                     while (true) {
                         System.out.println("----NHẬP THÔNG TIN KHÁCH HANG----");
                         int m;
-                        while(true){
+                        while (true) {
                             try {
-                                  System.out.print("\n\t\tnhập số thông tin khách hàng cần thêm: ");
-                                   m =Integer.parseInt(nhap.nextLine());
-                                   break ;
+                                System.out.print("\n\t\tnhập số thông tin khách hàng cần thêm: ");
+                                m = Integer.parseInt(nhap.nextLine());
+                                break;
                             } catch (Exception e) {
                                 System.out.println("\t\tCHÚ Ý:đã nhập sai đinh dạng xin vui lòng nhâp lại ");
                                 continue;
-                                       
+
                             }
- 
+
                         }
-                      
-                    
+
                         for (int i = 1; i <= m; i++) {
-                           
+
                             KhachHang KH = new KhachHang();
                             KH.nhapKH();
                             if (checkMaKH(KH.getMaKh(), listKH) == false) {
@@ -142,7 +142,7 @@ public class QuanLI {
                         }
                         System.out.println("\tBạn có muốn nhập thông tin khách hàng  nữa không (1-có/0-không): ");
                         int check1 = nhap.nextInt();
-                        if (check1==1) {
+                        if (check1 == 1) {
                             continue;
                         } else {
                             break;
@@ -233,100 +233,114 @@ public class QuanLI {
                 }
                 case 4: {
                     System.out.println("---DANH SÁCH SẢN PHẨM-------");
-                       System.out.printf("\n%10s%20s%20s%20s%20s","mã sản phẩm","tên sản phẩm","đơn giá","ngày sản xuất","số lượng");
+                    System.out.printf("\n%10s%20s%20s%20s%20s", "mã sản phẩm", "tên sản phẩm", "đơn giá", "ngày sản xuất", "số lượng");
                     for (SanPham x : listSP) {
-                     x.xuatSP();
+                        x.xuatSP();
                     }
                     break;
                 }
                 case 5: {
-                    while (true) {
-                        System.out.print("\nnhập mã khách hàng : ");
-                        String maKH = nhap.nextLine();
-                        if (checkMaKH(maKH, listKH) == true) {
-                            System.out.print("\nnhập mã sản phẩm cần mua: ");
-                            String maSPMua = nhap.nextLine();
-                            if (checkMaSP(maSPMua, listSP) == true) {
-                                System.out.println("nhập số lượng sản phẩm cần mua : ");
-                                int SLSPMua = nhap.nextInt();
-                                boolean flag = false;
-                                for (SanPham sp : listSP) {
-                                    if (sp.getMaSp().equals(maSPMua) && sp.getSoLuongSP() >= SLSPMua) {
-                                        HoaDon x = new HoaDon();
-                                        int SLSPSauMua = sp.getSoLuongSP() - SLSPMua;    // số lượng sản phẩm sau khi mua trong kho của sản phẩm đó 
-                                        x.setMaKH(maKH);
-                                        x.setMaSP(maSPMua);
-                                        x.setSoLuong(SLSPMua);
-                                        x.setThanhTien(SLSPMua * sp.getDonGia());
-                                        sp.setSoLuongSP(SLSPSauMua);  // update lại số lượng sản phẩm trong kho sau khi dc khách hàng mua
-                                        listHD.add(x);    // add hóa đơn mới vào trong danh sác
-                                        flag = true;
-                                       
-
-                                    } else if (sp.getMaSp().equals(maSPMua) && sp.getSoLuongSP() < SLSPMua) {
-                                        flag = false;
-                                    }
-
-                                }
-
-                                if (flag == true) {
-                                    System.out.println("\t\tMua hàng thành công. Hóa đơn đã được tạo.");
-                                } else if (flag == false) {
-                                    System.out.println("\t\t rất tiếc sản phẩm này dã hết hàng rồi bạn hãy mua sản phẩm khác nhé");
-                                }
-                            } else {
-                                System.out.println("\t\t mã sản phẩm không tồn tại");
-                            }
-                        } else {
-                            System.out.println("\t\tmã khách hàng không tồn tại");
-                        }
-                          Double tongTien = 0.0;
-                            for (KhachHang kh : listKH) {
-                                for (HoaDon x : listHD) {
-                                    if (kh.getMaKh().equals(maKH) && x.getMaKH().equals(maKH)) {
-                                        tongTien += x.getThanhTien();
-                                        kh.setTien(tongTien);
-                                    }
-                                }
-                            }
+//                   while(true){
+                    System.out.println("nhập mã hóa đơn : ");
+                    String maHD = nhap.nextLine();
+                    System.out.println("nhập mã khách hàng mua hàng : ");
+                    String maKH = nhap.nextLine();
+                    if (checkMaKH(maKH, listKH) == true) {
+                        System.out.println("nhập số loại sản phẩm mà khách hàng mua : ");
+                        int n = nhap.nextInt();
                         nhap.nextLine();
-                        System.out.print("\n\tBạn có muốn mua nữa không(yes/no) : ");
-                        String chon3 = nhap.nextLine();
-                        if (chon3.equalsIgnoreCase("yes")) {
-                            continue;
+                        if (listSP.size() >= n) {
+                            int count = 0;
+                            ArrayList<SP_hoaDon> listSPHD1 = new ArrayList<>();
+                            for (int i = 1; i <= n; i++) {
+                                System.out.println(" -----loại sản phẩm -----" + i);
+
+                                System.out.println("nhập mã sp : ");
+                                String maSp = nhap.nextLine();
+                                if (checkMaSP(maSp, listSP) == true) {
+                                    System.out.println("nhập số lượng sản phẩm : ");
+                                    int SLSPMua = nhap.nextInt();
+                                    nhap.nextLine();
+                                    for (SanPham SP : listSP) {
+                                        if (SP.getMaSp().equals(maSp) && SP.getSoLuongSP() >= SLSPMua) {
+                                            SP_hoaDon x = new SP_hoaDon();
+                                            x.setMaSp(maSp);
+                                            x.setSoLuongMua(SLSPMua);
+                                            float thanhTien = (float) (SLSPMua * SP.getDonGia());
+                                            x.setThanhTien(thanhTien);
+                                            listSPHD1.add(x);
+                                            int SLSPSauMua = SP.getSoLuongSP() - SLSPMua;
+                                            SP.setSoLuongSP(SLSPSauMua);
+                                            count++;//tức là : nếu mà hoa đơn khi ghi nhận 1 sản phẩm thì biến count tăng lên 
+                                            flag = true;
+                                            System.out.println("sản phẩm có mã " + maSp + " đã thêm thành công vô hóa đơn");
+                                        } else if (SP.getMaSp().equals(maSp) && SP.getSoLuongSP() < SLSPMua) {
+                                            System.out.println("sản phẩm có mã " + maSp + " số lượng không đủ");
+                                        }
+                                    }
+//                                
+//                              
+                                } else {
+                                    System.out.println("mã sp không tồn tại xin cảm ơn");
+                                    continue;
+                                }
+                            }
+                            if (count >= 1) {
+                                HoaDon hoadon = new HoaDon();
+                                float thanhTienHD = 0;
+                                hoadon.setMaHD(maHD);
+                                hoadon.setMaKH(maKH);
+                                hoadon.setListSPHD(listSPHD1);
+                                for (SP_hoaDon x : listSPHD1) {
+                                    thanhTienHD += x.getThanhTien();
+                                }     // tính tổng tiền của cả hóa đơn đó
+                                hoadon.setThanhTien(thanhTienHD);
+                                listHD.add(hoadon);
+                                System.out.println("hóa đơn đã được tạo thanh công xin vui lòng chờ khách hàng thanh toán");
+
+                            }
                         } else {
-                          
-                            break;
+                            System.out.println("số loại sản phẩm trong kho vượt quy định số loại sản phẩm mà khác hàng mua");
                         }
 
+                    } else {
+                        System.out.println("mã khách hàng không tồn tại xin vui lòng check lại ");
                     }
-
+                    Double tongTienKH = 0.0;
+                    for (KhachHang kh : listKH) {
+                        for (HoaDon x : listHD) {
+                            if (kh.getMaKh().equals(maKH) && x.getMaKH().equals(maKH)) {
+                                tongTienKH += x.getThanhTien();
+                                kh.setTien(tongTienKH);
+                            }
+                        }
+                    }
+//                   }
                     break;
 
                 }
                 case 6: {
-                    System.out.println("\t\t\t--------- DANH SÁCH HÓA ĐƠN-------------------------------------");
-                     System.out.printf("%10s%20s%20s%20s","Mã khách hàng","Mã sản phẩm","Số lượng","Thành tiên");
-                        
                     for (HoaDon x : listHD) {
-                        x.xuatHD();
+                        x.hienThiHoaDon();
                     }
                     break;
                 }
                 case 7: {
+
                     Collections.sort(listKH, new Comparator<KhachHang>() {
                         @Override
                         public int compare(KhachHang o1, KhachHang o2) {
-                            return (int) (o2.getTien() - o1.getTien());
+                            return (int) (o1.getTien() - o2.getTien());
                         }
 
-                    });   
+                    });
                     if (listKH.size() > 0) {
                         System.out.println("\t\t___DANH SÁCH THÔNG TIN KHÁCH HÀNG THEO TĂNG GIẦN CỦA TỔNG TIỀN MUA______");
-                        System.out.printf("\n%10s%20s%20s%20s%20s","Mã khách hàng" ,"Tên khách hàng","Địa chỉ","Năm Sinh","Tổng tiền" );
+                        System.out.printf("\n%10s%20s%20s%20s%20s", "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Năm Sinh", "Tổng tiền");
                         for (KhachHang x : listKH) {
-                            if(x.getTien()>0)
-                          x.xuatKHTT();
+                            if (x.getTien() > 0) {
+                                x.xuatKHTT();
+                            }
                         }
                     } else {
                         System.out.println("Danh sách khách hàng đang bị rỗng hãy thoát ra và thêm mới vào");
@@ -336,9 +350,9 @@ public class QuanLI {
                 }
                 case 8: {
                     System.out.println("DANH SÁCH THÔNG TIN KHÁCH HÀNG");
-                    System.out.printf("\n%10s%20s%20s%20s","mã khách hàng","tên khách hàng","địa chỉ","năm sinh");
+                    System.out.printf("\n%10s%20s%20s%20s", "mã khách hàng", "tên khách hàng", "địa chỉ", "năm sinh");
                     for (KhachHang x : listKH) {
-                      x.xuatKH();
+                        x.xuatKH();
                     }
                     break;
                 }
