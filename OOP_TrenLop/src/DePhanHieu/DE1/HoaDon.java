@@ -20,15 +20,15 @@ public class HoaDon {
     
     private float thanhTien;
     private String maKH;
-    private String maHD ;
+   
     public HoaDon() {
     }
 
-    public HoaDon( float thanhTien, ArrayList<SP_hoaDon> listSPHP, String maHD) {
+    public HoaDon( float thanhTien, ArrayList<SP_hoaDon> listSPHP) {
         
         this.thanhTien = thanhTien;
         this.listSPHD=listSPHP;
-        this.maHD=maHD ;
+      
     }
 
     
@@ -57,13 +57,7 @@ public class HoaDon {
         this.listSPHD = listSPHD;
     }
 
-    public String getMaHD() {
-        return maHD;
-    }
-
-    public void setMaHD(String maHD) {
-        this.maHD = maHD;
-    }
+ 
     
     public void hienThiSPHD(){
         for(SP_hoaDon x : listSPHD){
@@ -72,18 +66,15 @@ public class HoaDon {
     }
    
     public void hienThiHoaDon(){
-            System.out.println("---------thông tin hóa đơn " + this.maHD +"-----------------");
+            System.out.println("\n---------thông tin hóa đơn------------ " );
             System.out.println("mã khách hàng : "+this.maKH);
             System.out.println("danh sách sản phẩm mà khách hàng mua: ");
-              System.out.printf("\n%30s|%30s|%30s","mã sản phẩm mua" ,"số lượng mua","thành tiền sản phẩm");
+            System.out.printf("\n%30s|%30s|%30s","mã sản phẩm mua" ,"số lượng mua","thành tiền sản phẩm");
             hienThiSPHD();
             System.out.println("\nTổng tiền của hóa đơn này là : "+getThanhTien());
             
     }
-    @Override
-    public String toString() {
-        return "HoaDon{" + "listSPHD=" + listSPHD + ", thanhTien=" + thanhTien + ", maKH=" + maKH + '}';
-    }
+   
 
    
     

@@ -40,7 +40,7 @@ public class QuanLI {
         }
         return false;
     }
-
+    
     public void menu() {
         System.out.println("\n\t\t\t ____________MENU____________________________");
         System.out.println("\t\t\t1. nhập thông tin sản phẩm");
@@ -240,10 +240,8 @@ public class QuanLI {
                     break;
                 }
                 case 5: {
-//                   while(true){
-                    System.out.println("nhập mã hóa đơn : ");
-                    String maHD = nhap.nextLine();
-                    System.out.println("nhập mã khách hàng mua hàng : ");
+                  while(true){
+                   System.out.println("nhập mã khách hàng mua hàng : ");
                     String maKH = nhap.nextLine();
                     if (checkMaKH(maKH, listKH) == true) {
                         System.out.println("nhập số loại sản phẩm mà khách hàng mua : ");
@@ -254,7 +252,6 @@ public class QuanLI {
                             ArrayList<SP_hoaDon> listSPHD1 = new ArrayList<>();
                             for (int i = 1; i <= n; i++) {
                                 System.out.println(" -----loại sản phẩm -----" + i);
-
                                 System.out.println("nhập mã sp : ");
                                 String maSp = nhap.nextLine();
                                 if (checkMaSP(maSp, listSP) == true) {
@@ -272,7 +269,6 @@ public class QuanLI {
                                             int SLSPSauMua = SP.getSoLuongSP() - SLSPMua;
                                             SP.setSoLuongSP(SLSPSauMua);
                                             count++;//tức là : nếu mà hoa đơn khi ghi nhận 1 sản phẩm thì biến count tăng lên 
-                                            flag = true;
                                             System.out.println("sản phẩm có mã " + maSp + " đã thêm thành công vô hóa đơn");
                                         } else if (SP.getMaSp().equals(maSp) && SP.getSoLuongSP() < SLSPMua) {
                                             System.out.println("sản phẩm có mã " + maSp + " số lượng không đủ");
@@ -288,7 +284,6 @@ public class QuanLI {
                             if (count >= 1) {
                                 HoaDon hoadon = new HoaDon();
                                 float thanhTienHD = 0;
-                                hoadon.setMaHD(maHD);
                                 hoadon.setMaKH(maKH);
                                 hoadon.setListSPHD(listSPHD1);
                                 for (SP_hoaDon x : listSPHD1) {
@@ -313,9 +308,21 @@ public class QuanLI {
                                 tongTienKH += x.getThanhTien();
                                 kh.setTien(tongTienKH);
                             }
+                                    
                         }
                     }
-//                   }
+                  
+                   
+                    System.out.println("bạn có nhập tiếp hóa đơn không (yes/no): ");
+                    String text=nhap.nextLine();
+                    if(text.equalsIgnoreCase("yes")){
+                        continue;
+                    }
+                    else{
+                        break ;
+                    }
+
+                  }
                     break;
 
                 }
